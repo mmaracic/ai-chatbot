@@ -1,0 +1,28 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "ai-chatbot",
+    "collectionId": "7cfaad5e-accc-426f-b6bd-ae1c5eb3541d",
+    "dateExported": "2024-07-21T00:31:03.409Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "a9526ef3-475b-4a5f-8706-ddbad536fc24",
+            "colId": "7cfaad5e-accc-426f-b6bd-ae1c5eb3541d",
+            "containerId": "",
+            "name": "http://localhost:8000/sentiment",
+            "url": "http://localhost:8000/sentiment",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-07-21T00:30:50.185Z",
+            "modified": "2024-07-21T00:30:50.185Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"input\":\"I am happy\"\n}",
+                "form": []
+            }
+        }
+    ],
+    "ref": "WbUFNhivbSLTFjb_rMkiXgH_QeP4hgGiUAhczL4cD6FmvYcGpUwvozso12pz6AwlX_0OcXcTWTmdD6WVQ-ki-g"
+}

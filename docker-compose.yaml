@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+  chatbot:
+    build:
+      context: ./docker
+    image: ai-chatbot:1.0
+    ports:
+      - 8000:8000
+    environment:
+      - ROOT_PASSWORD=test
+    volumes:
+      - ./data:/data
