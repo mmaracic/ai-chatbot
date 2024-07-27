@@ -1,9 +1,23 @@
+from pathlib import Path
 from fastapi import FastAPI
 from pydantic import BaseModel
 from transformers import pipeline
+from huggingface_hub import login
+import torch
 
-# You can check any other model in the Hugging Face Hub. In my case I chose this one to classify text by positive and negative sentiment. 
-pipe = pipeline(model="distilbert/distilbert-base-uncased-finetuned-sst-2-english")
+token = Path('token').read_text().strip()
+print("Hugginface token is:", token)
+login(token=token)
+
+# llama model - https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct
+pipe = pipeline(
+    "text-generation",
+    model="meta-llama/Meta-Llama-3.1-8B-Instruct",
+    model_kwargs={"torch_dtype": torch.bfloat16},
+    device_map="auto"    
+)
+
+print("Model started")
 
 # We define the app
 app = FastAPI()
@@ -20,9 +34,7 @@ def get_response(request: RequestModel):
     prompt = request.input
 
     # We use the hf model to classify the prompt
-    response = pipe(prompt)
+    response = pipe([prompt], max_new_tokens=256)
 
-    # We get both the label and the score from the input
-    label = response[0]["label"]
-    score = response[0]["score"]
-    return f"The '{prompt}' input is {label} with a score of {score}"
+    response_text = response[0]["generated_text"][-1]
+    return f"{response_text}"
