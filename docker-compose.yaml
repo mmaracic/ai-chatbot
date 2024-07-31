@@ -11,3 +11,5 @@ services:
       - ROOT_PASSWORD=test
     volumes:
       - ./data:/data
+    devices:
+      - /dev/dri:/dev/dri
