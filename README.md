@@ -18,6 +18,17 @@ sudo apt install python3-pip
 pip install -U "huggingface_hub[cli]"
 ```
 * Add install folder to ~/.profile
+
+For Windows
+* Install Python 3
+* Install pip:
+```
+python -m ensurepip --upgrade
+```
+```
+python -m pip install --upgrade pip
+```
+* Add python and pip path <python_folder>\Scripts (e.g. C:\Python38\Scripts) to Windows path 
 # Hugging face
 Logging in:  
 ```
