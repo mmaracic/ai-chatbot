@@ -39,6 +39,12 @@ Copy token file to docker subfolder and it will be used in docker image.
 # Start app
 Run the docker-compose file
 
+## On machine
+* In the folder where application is run:
+```
+uvicorn app:app --host 127.0.0.1 --port 8000
+```
+
 ## Errors
 If the image doesnt start force full rebuild with upgraded requirements:
 ```

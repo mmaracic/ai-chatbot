@@ -1,7 +1,7 @@
 from pathlib import Path
 from fastapi import FastAPI
 from pydantic import BaseModel
-from transformers import pipeline
+from transformers import pipeline, GPT2Tokenizer, GPT2LMHeadModel, AutoModelForCausalLM, AutoTokenizer
 from huggingface_hub import login
 import torch
 
@@ -9,15 +9,18 @@ token = Path('token').read_text().strip()
 print("Hugginface token is:", token)
 login(token=token)
 
-# llama model - https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct
+#https://huggingface.co/openai-community/gpt2
+tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+model = GPT2LMHeadModel.from_pretrained('gpt2')
+
+#https://huggingface.co/microsoft/phi-1_5
+
 pipe = pipeline(
     "text-generation",
-    model="meta-llama/Meta-Llama-3.1-8B-Instruct",
-    model_kwargs={"torch_dtype": torch.bfloat16},
+    model=model,
+    tokenizer=tokenizer,
     device_map="auto"    
 )
-
-print("Model started")
 
 # We define the app
 app = FastAPI()
@@ -36,5 +39,5 @@ def get_response(request: RequestModel):
     # We use the hf model to classify the prompt
     response = pipe([prompt], max_new_tokens=256)
 
-    response_text = response[0]["generated_text"][-1]
+    response_text = response[0][0]["generated_text"]
     return f"{response_text}"
