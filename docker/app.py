@@ -10,10 +10,14 @@ print("Hugginface token is:", token)
 login(token=token)
 
 #https://huggingface.co/openai-community/gpt2
-tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
-model = GPT2LMHeadModel.from_pretrained('gpt2')
+#tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+#model = GPT2LMHeadModel.from_pretrained('gpt2')
 
 #https://huggingface.co/microsoft/phi-1_5
+
+MODEL_NAME = "arnir0/Tiny-LLM"
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
 
 pipe = pipeline(
     "text-generation",
