@@ -1,2 +1,3 @@
 docker/token
 docker/__pycache__
+.venv

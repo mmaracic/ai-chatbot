@@ -9,9 +9,13 @@
 ```
 sudo apt install python-is-python3
 ```
-* Install pip
+* Install pip (will not work if pip was installed using apt-get):
 ```
 sudo apt install python3-pip
+```
+* Install possibility to create virtual environments
+```
+sudo apt install python3-venv
 ```
 * Install hugginface cli
 ```
@@ -29,6 +33,29 @@ python -m ensurepip --upgrade
 python -m pip install --upgrade pip
 ```
 * Add python and pip path <python_folder>\Scripts (e.g. C:\Python38\Scripts) to Windows path 
+
+## PIP
+The custom pip libraries need to be installed in virtual environment (otherwise for environment maintained for apt-get we will get - error: externally-managed-environment)
+
+Check if virtual environment is active (if its not active it will write /usr/bin/python, if it is cmd will be prefixed by name of virtual env and this will print env path)
+```
+which python
+```
+Create virtual environment in.venv subfolder
+```
+python3 -m venv .venv
+```
+Activate environment in .venv subfolder:
+```
+source .venv/bin/activate
+```
+In the virtual environment it will now be possible to install any needed libraries.
+
+To deactivate the current virtual environment use:
+```  
+deactivate
+```
+
 # Hugging face
 Logging in:  
 ```
@@ -40,6 +67,7 @@ Copy token file to docker subfolder and it will be used in docker image.
 Run the docker-compose file
 
 ## On machine
+* Activate the local python environment .venv
 * In the folder where application is run:
 ```
 uvicorn app:app --host 127.0.0.1 --port 8000

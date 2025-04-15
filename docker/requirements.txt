@@ -5,3 +5,5 @@ uvicorn
 requests
 torch
 accelerate
+protobuf
+sentencepiece
