@@ -68,11 +68,11 @@ Run the docker-compose file
 
 ## On machine
 * Activate the local python environment .venv
-* In the folder where application is run:
+* In the folder where application is, run:
 ```
-uvicorn app:app --host 127.0.0.1 --port 8000
+uvicorn docker.app:app --app-dir .. --host 127.0.0.1 --port 8000
 ```
-
+App-dir option sets the runtime folder of the app to root project folder which results in package names as expected by .py files. In this case the app needs to be specified as a submodule of docker module (folder).  
 ## Errors
 If the image doesnt start force full rebuild with upgraded requirements:
 ```

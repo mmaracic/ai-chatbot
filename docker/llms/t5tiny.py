@@ -1,5 +1,5 @@
 from transformers import Pipeline
-from docker.llms import LLM
+from docker.llm import LLM
 
 class T5TINY(LLM):
     

@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from huggingface_hub import login
 
-from docker.llms import get_model
+from docker.llm import get_model
 
 token = Path('token').read_text().strip()
 print("Hugginface token is:", token)

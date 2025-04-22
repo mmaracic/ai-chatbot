@@ -1,5 +1,5 @@
 from transformers import Pipeline
-from docker.llms import LLM
+from docker.llm import LLM
 
 class T5TINY(LLM):
     
@@ -7,7 +7,7 @@ class T5TINY(LLM):
     
     def load_model(self):
         from transformers import pipeline
-        from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+        from transformers import AutoTokenizer, AutoModelForCausalLM
         MODEL_NAME = "arnir0/Tiny-LLM"
         tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
         model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
