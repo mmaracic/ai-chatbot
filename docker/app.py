@@ -13,7 +13,8 @@ login(token=token)
 # We define the app
 app = FastAPI()
 
-model = get_model("t5-tiny").load_model()
+model = get_model("t5-tiny")
+model.load_model()
 
 # We define that we expect our input to be a string
 class RequestModel(BaseModel):

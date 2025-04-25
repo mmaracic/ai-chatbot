@@ -12,7 +12,7 @@ class T5TINY(LLM):
         tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
         model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
 
-        pipe = pipeline(
+        self.pipe = pipeline(
             "text-generation",
             model=model,
             tokenizer=tokenizer,
@@ -20,7 +20,7 @@ class T5TINY(LLM):
         )
 
     def query_model(self, prompt: str) -> str:
-        response = pipe([prompt], max_new_tokens=256)
+        response = self.pipe([prompt], max_new_tokens=256)
 
         response_text = response[0][0]["generated_text"]
         return f"{response_text}"
