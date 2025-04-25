@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from huggingface_hub import login
 
-from docker.llm import ModelType, get_model
+from docker.llm import LLM, ModelType, get_model
 
 token = Path('token').read_text().strip()
 print("Hugginface token is:", token)
@@ -12,19 +12,29 @@ login(token=token)
 
 # We define the app
 app = FastAPI()
+model:LLM = None
 
-model = get_model(ModelType.T5_TINY)
-model.load_model()
-
-# We define that we expect our input to be a string
-class RequestModel(BaseModel):
+class RequestDto(BaseModel):
     input: str
 
-# Now we define that we accept post requests
-# ->  In APIs, requests are made to ask the API to perform a certain task — in this case to analyze a piece of text. 
-@app.post("/sentiment")
-def get_response(request: RequestModel):
+@app.post("/request")
+def get_response(request: RequestDto):
+    if model is None:
+        return "Model not loaded. Please load a model first."
+
     # We get the input prompt
     prompt = request.input
-    
     return model.query_model(prompt)
+
+class ModelDto(BaseModel):
+    model_type: str
+
+@app.post("/set_model")
+def set_model(request: ModelDto):
+    # We get the input model type
+    model_type = ModelType(request.model_type)
+    
+    global model
+    model = get_model(model_type)
+    model.load_model()
+    return f"model {model_type} loaded"
