@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from huggingface_hub import login
 
-from docker.llm import get_model
+from docker.llm import ModelType, get_model
 
 token = Path('token').read_text().strip()
 print("Hugginface token is:", token)
@@ -13,7 +13,7 @@ login(token=token)
 # We define the app
 app = FastAPI()
 
-model = get_model("t5-tiny")
+model = get_model(ModelType.T5_TINY)
 model.load_model()
 
 # We define that we expect our input to be a string
