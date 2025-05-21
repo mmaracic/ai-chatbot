@@ -39,7 +39,10 @@ The custom pip libraries need to be installed in virtual environment (otherwise 
 
 Check if virtual environment is active (if its not active it will write /usr/bin/python, if it is cmd will be prefixed by name of virtual env and this will print env path)
 ```
-which python
+which python (Linux)
+```
+```
+where python (Windows)
 ```
 Create virtual environment in.venv subfolder
 ```
@@ -47,9 +50,18 @@ python3 -m venv .venv
 ```
 Activate environment in .venv subfolder:
 ```
-source .venv/bin/activate
+source .venv/bin/activate (Linux)
 ```
-In the virtual environment it will now be possible to install any needed libraries.
+```
+.\.venv\bin\activate (Windows)
+```
+In the virtual environment it will now be possible to install any needed libraries using:
+```
+python3 -m pip install requests
+```
+```
+python3 -m pip install -r requirements.txt
+```
 
 To deactivate the current virtual environment use:
 ```  
